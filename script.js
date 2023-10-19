@@ -30,3 +30,33 @@ if (passwordLength < MIN_LENGTH || passwordLength > MAX_LENGTH) {
   // Prompt password length again
 } // Condition to check if letters are in it - have yet to figure out how to code this.
 
+// Prompting for character requirements 
+
+var lowercase = prompt("Would you like to include lowercase letters in your password? Enter: Y or N");
+var uppercase = prompt("Would you like to include uppercase letters in your password? Enter: Y or N");
+var numeric = prompt("Would you like to include numbers in your password? Enter: Y or N")
+var specialLetters = prompt("Would you like to include special letters in your password? Enter: Y or N")
+
+// Try to make Yes = True, No = False
+
+// function responseTranslator(response) {
+//   if (response === "Yes" || response === "Y") {
+//     response = true;
+//     console.log("test 1");
+//   } else {
+//     response = false;
+//     console.log("test 2");
+//   }
+// }
+
+// var test = responseTranslator(hasLowercase);
+
+// console.log(hasLowercase);
+// console.log(test);
+// console.log(responseTranslator(hasUppercase));
+// console.log(responseTranslator(hasNumeric));
+// console.log(responseTranslator(hasSpecialLetters));
+
+if (lowercase === "N" || uppercase === "N" || numeric === "N" || specialLetters === "N" ) {
+  alert("At least one of the characters has to be included.")
+}
