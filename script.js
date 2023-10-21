@@ -17,9 +17,9 @@ generateBtn.addEventListener("click", writePassword);
 MIN_LENGTH = 8;
 MAX_LENGTH = 128;
 
-var alphabet = ["abcdefghijklmnopqrstuvwxyz"];
-// var special = [" !\"$%&'()*+,-./:;<=>?@[]\^_`{|}~"];
-
+var alphabet = "abcdefghijklmnopqrstuvwxyz";
+var special = " !$%&'()*+,-./:;<=>?@[]\^_`{|}~";
+special += '"';
 
 // Function to generate password
 
@@ -109,20 +109,23 @@ function generatePassword() {
   // Generate random alphabet from a-z (both lower & uppercase)
     if (conditionNames[selector] === "lowercase") {
       lowerChar = Math.floor(Math.random() * 26);
-      password = password.concat(alphabet[0][lowerChar]);
+      password = password.concat(alphabet[lowerChar]);
     }
 
     if (conditionNames[selector] === "uppercase") {
-      upperChar = Math.floor(Math.random() * 26);
-      password = password.concat(alphabet[0][upperChar].toUpperCase());
+      specialChar = Math.floor(Math.random() * special.length);
+      password = password.concat(special[specialChar].toUpperCase());
     }
 
   // Generate random special letters 
-  
-  //Generate randomly from that list
-  
-  // While loop?
+
+  if (conditionNames[selector] === "specialLetters") {
+    upperChar = Math.floor(Math.random() * 26);
+    password = password.concat(alphabet[upperChar].toUpperCase());
   }
+
+  }
+
   console.log(password);
   return password;
 
