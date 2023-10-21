@@ -17,12 +17,11 @@ generateBtn.addEventListener("click", writePassword);
 MIN_LENGTH = 8;
 MAX_LENGTH = 128;
 
-// var numbers = ["0123456789"];
 var alphabet = ["abcdefghijklmnopqrstuvwxyz"];
 // var special = [" !\"$%&'()*+,-./:;<=>?@[]\^_`{|}~"];
 
 
-//This should all be in the generatePassword() function
+// Function to generate password
 
 function generatePassword() {
   var passwordLength = prompt("Please indicate length of password (min: 8, max:128)");
@@ -40,52 +39,79 @@ function generatePassword() {
 
   alert("Thank you for indicating length of password. Next, you will be asked to confirm whether to include certain characters. \n \nPress 'OK' for Yes and 'Cancel' for No");
 
-  var lowercase;
-  
-  if (confirm ("Would you like to include lowercase letters in your password?") === true) {
+  var conditionNames = [];
+  var conditions = [lowercase, uppercase, numeric, specialLetters]
+
+  var lowercase = confirm ("Would you like to include lowercase letters in your password?");
+
+  if (lowercase === true) {
     alert("Lowercase will be included.");
     lowercase = true;
+    conditionNames.push("lowercase");
   } else {
     alert("Lowercase will not be included.");
     lowercase = false;
   }
 
-  console.log(lowercase);
+  var uppercase = confirm ("Would you like to include uppercase letters in your password?");
 
-  var uppercase = prompt("Would you like to include uppercase letters in your password? Enter: Y or N");
-  var numeric = prompt("Would you like to include numbers in your password? Enter: Y or N")
-  var specialLetters = prompt("Would you like to include special letters in your password? Enter: Y or N")
-  
-  // Try to make Yes = True, No = False
+  if (uppercase === true) {
+    alert("Uppercase will be included.");
+    uppercase = true;
+    conditionNames.push("uppercase");
+  } else {
+    alert("Uppercase will not be included.");
+    uppercase = false;
+  }
 
-  var conditions = []
+  var numeric = confirm ("Would you like to include numbers in your password?");
+
+  if (numeric === true) {
+    alert("Numbers will be included.");
+    numeric = true;
+    conditionNames.push("numeric");
+  } else {
+    alert("Numbers will not be included.");
+    numeric = false;
+  }
+
+  var specialLetters = confirm ("Would you like to include special letters in your password?");
+
+  if (specialLetters === true) {
+    alert("Special letters will be included.");
+    specialLetters = true;
+    conditionNames.push("specialLetters");
+  } else {
+    alert("Special letters will not be included.");
+    specialLetters = false;
+  }
+
+  var allFalse = conditions.every(val => val === false);
   
-  if (lowercase === "N" && uppercase === "N" && numeric === "N" && specialLetters === "N") {
-    alert("At least one of the characters has to be included.")}
-    // Prompt again
-  // } else if (lowercase.toUpperCase === "Y" || lowercase.toUpperCase === "YES") {
-  //   conditions.push("lowercase");
-  // } else if (uppercase.toUpperCase === "Y" || uppercase.toUpperCase === "YES") {
-  //   conditions.push("uppercase");
-  // } else if (numeric.toUpperCase === "Y" || numeric.toUpperCase === "YES") {
-  //   conditions.push("numeric");
-  // } else if (specialLetters.toUpperCase === "Y" || specialLetters.toUpperCase === "YES") {
-  //   conditions.push("special");
- 
-    // } else {
-  //   alert("Please try again and enter valid responses.")
-  //   // Prompt again
-  // }
-  
+  if (allFalse) { 
+    alert("At least one of the characters has to be included.");
+    // Prompt to select again.
+  }
+
   var password = "";
 
   for (var count = 0; count < passwordLength; count++) {
-  // Generate random number form 0-9
-    var ranNum = Math.floor(Math.random() * 10);
-    ranNum = (ranNum).toString();
-    password = password.concat(ranNum);
+  // Generate random number form 0-n (depending on which is true)
+    var n = conditionNames.length;
+    var selector = Math.floor(Math.random() * n);
+
+    if (conditionNames[selector] === "numeric") {
+      ranNum = Math.floor(Math.random() * 10);
+      ranNum = (ranNum).toString();
+      password = password.concat(ranNum);
+    }
 
   // Generate random alphabet from a-z (both lower & uppercase)
+    if (conditionNames[selector] === "lowercase") {
+      lowerChar = Math.floor(Math.random() * 26);
+      password = password.concat(alphabet[0][lowerChar]);
+    }
+
   // Generate random special letters 
   
   //Generate randomly from that list
