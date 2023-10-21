@@ -112,6 +112,11 @@ function generatePassword() {
       password = password.concat(alphabet[0][lowerChar]);
     }
 
+    if (conditionNames[selector] === "uppercase") {
+      upperChar = Math.floor(Math.random() * 26);
+      password = password.concat(alphabet[0][upperChar].toUpperCase());
+    }
+
   // Generate random special letters 
   
   //Generate randomly from that list
