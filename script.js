@@ -103,28 +103,18 @@ function generatePassword() {
 
   alert("Thank you for indicating length of password. Next, you will be asked to confirm whether to include certain characters. \n \nPress 'OK' for Yes and 'Cancel' for No");
 
-  var conditionNames = [];
-  var conditions = [lowercase, uppercase, numeric, specialLetters]
-
   var lowercase = includeLowercase();
   var uppercase = includeUppercase();
   var numeric = includeNumeric();
   var specialLetters = includeSpecial();
+  
+  var conditionNames = ["lowercase", "uppercase", "numeric", "specialLetters"];
+  var conditions = [lowercase, uppercase, numeric, specialLetters];
 
-  if (lowercase === true) {
-    conditionNames.push("lowercase");
-  }
-
-  if (uppercase === true) {
-    conditionNames.push("lowercase");
-  }
-
-  if (numeric === true) {
-    conditionNames.push("numeric")
-  }
-
-  if (specialLetters === true) {
-    conditionNames.push("specialLetters");
+  for (var i = 0; i < conditions.length; i++) {
+    if (conditions[i] === false) {
+      delete conditionNames[i];
+    }
   }
 
   var allFalse = conditions.every(val => val === false);
