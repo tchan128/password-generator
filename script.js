@@ -21,19 +21,34 @@ var alphabet = "abcdefghijklmnopqrstuvwxyz";
 var special = " !$%&'()*+,-./:;<=>?@[]\^_`{|}~";
 special += '"';
 
+// Helper function 
+
+function passLength() {
+  var answer = prompt("Please indicate length of password (min: 8, max:128)");
+  return answer;
+}
+
 // Function to generate password
 
 function generatePassword() {
-  var passwordLength = prompt("Please indicate length of password (min: 8, max:128)");
 
   // Prompting for length of password 
-  if (passwordLength < MIN_LENGTH || passwordLength > MAX_LENGTH) {
-    alert("Please enter a number between 0 and 128.");
-    // Prompt password length again
-  } else if (passwordLength.includes(".")) {
-    alert("Please enter a whole number.")
-    // Prompt password length again
-  } // Condition to check if letters are in it - have yet to figure out how to code this.
+  var passwordLength = passLength();
+  var needsCheck = true;
+
+  while (needsCheck) 
+    if (isNaN(Number(passwordLength))) {
+      alert("Please enter a valid number.");
+      passwordLength = passLength();
+    } else if (passwordLength < MIN_LENGTH || passwordLength > MAX_LENGTH) {
+      alert("Please enter a number between 0 and 128.");
+      passwordLength = passLength();
+    } else if (passwordLength.includes(".")) {
+      alert("Please enter a whole number.");
+      passwordLength = passLength();
+    } else {
+      needsCheck = false;
+    }
 
   // Prompting for character requirements 
 
