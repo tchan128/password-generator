@@ -21,11 +21,60 @@ var alphabet = "abcdefghijklmnopqrstuvwxyz";
 var special = " !$%&'()*+,-./:;<=>?@[]\^_`{|}~";
 special += '"';
 
-// Helper function 
+// Helper functions 
 
 function passLength() {
-  var answer = prompt("Please indicate length of password (min: 8, max:128)");
-  return answer;
+  var response = prompt("Please indicate length of password (min: 8, max:128)");
+  return response;
+}
+
+function includeLowercase() {
+  var response = confirm ("Would you like to include lowercase letters in your password?");
+
+  if (response === true) {
+    alert("Lowercase will be included.");
+    return true;
+    conditionNames.push("lowercase");
+  } else {
+    alert("Lowercase will not be included.");
+    return false;
+  }
+}
+
+function includeUppercase() {
+  var response = confirm ("Would you like to include uppercase lowercase letters in your password?");
+
+  if (response === true) {
+    alert("Uppercase will be included.");
+    return true;
+  } else {
+    alert("Uppercase will not be included.");
+    return false;
+  }
+}
+
+function includeNumeric() {
+  var response = confirm ("Would you like to include numbers letters in your password?");
+
+  if (response === true) {
+    alert("Numbers will be included.");
+    return true;
+  } else {
+    alert("Numbers will not be included.");
+    return false;
+  }
+}
+
+function includeSpecial() {
+  var response = confirm ("Would you like to include special letters in your password?");
+
+  if (response === true) {
+    alert("Special letters will be included.");
+    return true;
+  } else {
+    alert("Special letters will not be included.");
+    return false;
+  }
 }
 
 // Function to generate password
@@ -57,48 +106,25 @@ function generatePassword() {
   var conditionNames = [];
   var conditions = [lowercase, uppercase, numeric, specialLetters]
 
-  var lowercase = confirm ("Would you like to include lowercase letters in your password?");
+  var lowercase = includeLowercase();
+  var uppercase = includeUppercase();
+  var numeric = includeNumeric();
+  var specialLetters = includeSpecial();
 
   if (lowercase === true) {
-    alert("Lowercase will be included.");
-    lowercase = true;
     conditionNames.push("lowercase");
-  } else {
-    alert("Lowercase will not be included.");
-    lowercase = false;
   }
-
-  var uppercase = confirm ("Would you like to include uppercase letters in your password?");
 
   if (uppercase === true) {
-    alert("Uppercase will be included.");
-    uppercase = true;
-    conditionNames.push("uppercase");
-  } else {
-    alert("Uppercase will not be included.");
-    uppercase = false;
+    conditionNames.push("lowercase");
   }
-
-  var numeric = confirm ("Would you like to include numbers in your password?");
 
   if (numeric === true) {
-    alert("Numbers will be included.");
-    numeric = true;
-    conditionNames.push("numeric");
-  } else {
-    alert("Numbers will not be included.");
-    numeric = false;
+    conditionNames.push("numeric")
   }
 
-  var specialLetters = confirm ("Would you like to include special letters in your password?");
-
   if (specialLetters === true) {
-    alert("Special letters will be included.");
-    specialLetters = true;
     conditionNames.push("specialLetters");
-  } else {
-    alert("Special letters will not be included.");
-    specialLetters = false;
   }
 
   var allFalse = conditions.every(val => val === false);
