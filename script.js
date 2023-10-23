@@ -81,7 +81,8 @@ function includeSpecial() {
 
 function generatePassword() {
 
-  // Prompting for length of password 
+  // Prompting and storing length of password 
+
   var passwordLength = passLength();
   var needsCheck = true;
 
@@ -99,7 +100,7 @@ function generatePassword() {
       needsCheck = false;
     }
 
-  // Prompting for character requirements 
+  // Prompting and storing character requirements 
 
   alert("Thank you for indicating length of password. Next, you will be asked to confirm whether to include certain characters. \n \nPress 'OK' for Yes and 'Cancel' for No");
 
@@ -130,6 +131,8 @@ function generatePassword() {
 
   }
 
+  // Randomly generate password
+
   var password = "";
 
   for (var count = 0; count < passwordLength; count++) {
@@ -144,6 +147,7 @@ function generatePassword() {
     }
 
   // Generate random alphabet from a-z (both lower & uppercase)
+  
     if (conditionNames[selector] === "lowercase") {
       lowerChar = Math.floor(Math.random() * 26);
       password = password.concat(alphabet[lowerChar]);
